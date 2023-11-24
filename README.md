@@ -3,6 +3,8 @@
 ### Purpose
 This project serves as a showcase for my proficiency in crafting modern, dynamic websites using React. The primary goal is to demonstrate my skills in creating a responsive design that not only looks impressive on larger screens but is also optimized for smaller devices. Additionally, the implementation of the PokeAPI showcases my expertise in making API calls and efficiently utilizing the retrieved data.
 
+Deployed: https://collect-pokemon-card.vercel.app/
+
 ### Key Features
 Responsive Design: The portfolio is meticulously designed to ensure a seamless and visually appealing experience across a variety of screen sizes.
 
