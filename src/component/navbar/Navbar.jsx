@@ -1,9 +1,21 @@
-import * as React from "react";
+import React, { useState } from "react";
 import "animate.css";
 import { AppBar, Box, Toolbar, Typography, Button } from "@mui/material";
 import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import CartList from "../shopping/CartList";
 
 export default function Navbar() {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const handleDrawerOpen = () => {
+    setDrawerOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setDrawerOpen(false);
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -37,9 +49,12 @@ export default function Navbar() {
                 animationDelay: "4000ms",
                 fontSize: "1rem", // Adjust font size
               }}
+              onClick={handleDrawerOpen}
             >
               <CatchingPokemonIcon sx={{ fontSize: 32, marginRight: 1 }} />
+              <ShoppingCartIcon sx={{ fontSize: 32, marginRight: 1 }} />
             </Button>
+            <CartList open={drawerOpen} onClose={handleDrawerClose} />
           </div>
         </Toolbar>
       </AppBar>

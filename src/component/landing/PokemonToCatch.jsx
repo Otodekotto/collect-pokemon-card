@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import "animate.css";
 
 const PokemonToCatch = () => {
@@ -9,6 +9,7 @@ const PokemonToCatch = () => {
     const getRandomPokemonId = () => Math.floor(Math.random() * 151) + 1;
 
     const fetchPokemonData = async () => {
+      localStorage.removeItem("caughtPokemons");
       try {
         const randomPokemonId = getRandomPokemonId();
         const response = await fetch(
@@ -30,8 +31,16 @@ const PokemonToCatch = () => {
   }, []);
 
   const handleCatchNow = () => {
-    // Add your logic for catching the Pokemon here
-    alert(`You caught ${pokemonData.name}!`);
+    if (pokemonData) {
+      // Save the caught Pokemon to local storage
+      const caughtPokemons =
+        JSON.parse(localStorage.getItem("caughtPokemons")) || [];
+      caughtPokemons.push(pokemonData.name);
+      localStorage.setItem("caughtPokemons", JSON.stringify(caughtPokemons));
+
+      // Display an alert to notify the user
+      alert(`You caught ${pokemonData.name}!`);
+    }
   };
 
   return (
@@ -49,6 +58,18 @@ const PokemonToCatch = () => {
         bottom: 0,
       }}
     >
+      <Typography
+        className="animate__animated animate__fadeIn"
+        style={{
+          color: "#F6FEAA",
+          fontWeight: "bold",
+          fontSize: "1vw",
+          animationDelay: "6500ms", // Add the unit "ms"
+          y: -50,
+        }}
+      >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit!
+      </Typography>
       {pokemonData ? (
         <div
           className="animate__animated animate__fadeInDown"
@@ -61,7 +82,7 @@ const PokemonToCatch = () => {
           />
         </div>
       ) : (
-        <p>Loading...</p>
+        <></>
       )}
 
       <Button
@@ -71,8 +92,10 @@ const PokemonToCatch = () => {
           marginTop: "20px",
           padding: "10px",
           fontSize: "1rem",
+          fontWeight: "bold", // Make the text bold
           color: "#373737",
           background: "#F6FEAA",
+          borderRadius: "20px", // Adjust the value for roundness
           animationDelay: "5500ms",
         }}
       >
